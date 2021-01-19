@@ -1,0 +1,21 @@
+version: "2"
+services:
+
+ miservicio_php_host:
+    image: php:7-apache
+    restart: unless-stopped
+    networks:
+      - web
+    labels:
+        - "traefik.backend=apache_host"
+        - "traefik.port=80"
+        - "traefik.frontend.rule=Host:host.URL.com.ar"
+        - "traefik.docker.network=web"
+    volumes:
+        - /home/pi/apache/host/:/var/www/html
+
+      
+networks:
+  web:
+    external:
+      name: web 
